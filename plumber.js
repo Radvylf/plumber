@@ -8,7 +8,7 @@ function plumb(code, args) {
         let nargs = [];
         let num = function(arg) {
             if (typeof arg == "string")
-                return arg.split("").map(el => el.codePointAt(0));
+                return arg.split("").map(el => el.codePointAt(0)).reverse();
             else if (Number.isInteger(arg))
                 return [arg];
             else
@@ -32,7 +32,6 @@ function plumb(code, args) {
             return true;
         return false;
     };
-    //
     for (let i = 0; i < grid.length; i++) {
         grid[i] = new Array(units[0].length);
         for (let u, j = 0; j < grid[i].length; j++) {
@@ -49,21 +48,6 @@ function plumb(code, args) {
         }
     }
     do {
-        /*{
-            let s = "";
-            for (let i = 0; i < grid.length; i++) {
-                for (let d, g, j = 0; j < grid[i].length; j++) {
-                    g = grid[i][j];
-                    if (g[0][0] !== null) {
-                        
-                    } else if (g[2][0] !== null) {
-                        
-                    }
-                }
-                s += "\n";
-            }
-            console.log(s);
-        }*/
         for (let i = 0; i < grid.length; i++) {
             for (let g, j = 0; j < grid[i].length; j++) {
                 g = grid[i][j];
@@ -89,7 +73,6 @@ function plumb(code, args) {
                 }
             }
         }
-        //
         for (let i = 0; i < grid.length; i++) {
             for (let u, g, j = 0; j < grid[i].length; j++) {
                 u = units[i][j];
@@ -145,11 +128,11 @@ function plumb(code, args) {
                     g[3] = [null];
                 } else if (u == "[[") {
                     if (g[2][0] !== null || g[3][0] !== null)
-                        if (j > 0)
+                        if (j < grid[i].length - 1)
                             g[6].push(g[2][0]);
                 } else if (u == "]]") {
                     if (g[2][0] !== null || g[3][0] !== null)
-                        if (j < grid[i].length - 1)
+                        if (j > 0)
                             g[6].push(g[3][0]);
                 }
             }
