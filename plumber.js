@@ -1,5 +1,5 @@
 function plumb(code, args) {
-    var units = code.split(/\r?\n|\r/g).map(el => el.replace(/[^[\]=]/g, " ").padEnd(Math.ceil(el.length / 2) * 2, " ").match(/.{1,2}/g));
+    var units = code.split(/\r?\n|\r/g).map(el => el.replace(/[^[\]=]/g, " ").padEnd(Math.ceil(el.length / 2) * 2, " ").match(/.{1,2}/g) || []);
     {
         let max = units.reduce((acc, el) => Math.max(acc, el.length), 0);
         units = units.map(el => el.concat(...new Array(max - el.length).fill("  ")));
