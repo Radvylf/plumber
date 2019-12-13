@@ -282,7 +282,7 @@ function plumb(code, args) {
                 var g = grid[x][y];
                 var u = units[x][y];
                 if (u == "==")
-                    return g[6][0];
+                    return g[6][0] === null ? -1 : g[6][0];
                 else if (u == "[]" || u == "][")
                     return g[d + 2][0];
                 else if (u == "=]" || u == "=[" || u == "]]" || u == "[ " || u == "] ")
